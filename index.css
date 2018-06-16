@@ -1,0 +1,157 @@
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: #5e4485;
+  color: #fff;
+  padding: 1% 0;
+  font-size: 1.2em;
+  border: 0;
+}
+
+.navbar-brand {
+  float: left;
+  min-height: 55px;
+  padding: 0 15px 5px;
+}
+
+
+
+.navbar-inverse .navbar-nav li a {
+  color: #d5d5d5;
+}
+
+.carousel-caption {
+  top: 50%;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+}
+
+.container {
+  margin: 4% auto;
+}
+
+#icon {
+  max-width: 200PX;
+  margin: 1% auto;
+}
+
+@media (max-width:900px){
+  .fa{
+      font-size: 20px;
+      padding: 10px;
+  }
+}
+
+@media (max-width:600px){
+  .carousel-caption{
+      display:none;
+  }
+  #icon{
+      max-width: 150px;
+  }
+  h4{
+      font-size: 1.7em;
+      color: blue;
+  }
+}
+
+footer{
+  width: 100%;
+  background-color: #5e4485;
+  padding: 5%;
+  color: #fff;
+}
+.fa{
+  padding: 15px;
+  font-size: 25px;
+  color: #fff;
+}
+.fa:hover{
+  color: brown;
+  text-decoration: none;
+}
+/***  Article seciton starts **/
+  .paper-flex-container {
+    display: flex;
+    flex-direction: column;
+    background-color:bisque;
+}
+.paper-flex-container h1{
+    font-size: 1em;
+    margin: 1em auto;
+}
+
+.paper-flex-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.paper{
+    height: 370px;
+    width: 250px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 0 20px grey;
+    padding: 1em;
+    margin: 1em;
+}
+.paper img{
+    height: 200px;
+    width:130px;
+}
+.paper h2{
+    font-size: 1em;
+    color: #444;
+}
+.paper p{
+    font-size: 0.8em;
+    color: coral;
+    padding: 1em;
+}
+
+/** Footer **/
+  .footer-center {    
+    margin-right: 0px;
+    margin-left: 0px;
+    background-color:darkorange;
+    text-align: center;
+   }
+   #lab_social_icon_footer {
+    padding: 0px 0;
+    background-color: #dedede;
+  }
+  
+  #lab_social_icon_footer a {
+    color: #333;
+  }
+  
+  #lab_social_icon_footer .social:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+  
+  #lab_social_icon_footer .social {
+    -webkit-transform: scale(0.8);
+    /* Browser Variations: */    
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+  }
+   #lab_social_icon_footer #social-fb:hover {
+    color: rgb(152, 59, 132);
+     }
+  
+  #lab_social_icon_footer #social-tw:hover {
+    color: #4099FF;
+  }
+  
+  #lab_social_icon_footer #social-gp:hover {
+    color: #d34836;
+  }  
+  #lab_social_icon_footer #social-em:hover {
+    color: #f39c12;
+  }
