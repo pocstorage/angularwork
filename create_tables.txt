@@ -1,0 +1,64 @@
+use keepnoteDB;
+
+CREATE TABLE User (
+    user_id int NOT NULL AUTO_INCREMENT,
+    user_name varchar(255) NOT NULL,
+    user_added_date TIMESTAMP NOT NULL,
+    user_password  varchar(255) NOT NULL,
+    user_mobile  varchar(255) NOT NULL,
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE Note (
+    note_id int NOT NULL AUTO_INCREMENT,
+    note_title varchar(255) NOT NULL,
+    note_creation_date TIMESTAMP NOT NULL,
+    note_content  varchar(255) NOT NULL,
+    note_status  varchar(255) NOT NULL,
+    PRIMARY KEY (note_id)
+);
+
+
+CREATE TABLE Category (
+    category_id int NOT NULL AUTO_INCREMENT,
+    category_name varchar(255) NOT NULL,
+    category_creation_date TIMESTAMP NOT NULL,
+    category_descr  varchar(255) NOT NULL,
+    category_creator  varchar(255) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
+
+CREATE TABLE Reminder (
+    reminder_id int NOT NULL AUTO_INCREMENT,
+    reminder_name varchar(255) NOT NULL,
+    reminder_creation_date TIMESTAMP NOT NULL,
+    reminder_descr  varchar(255) NOT NULL,
+    reminder_type  varchar(255) NOT NULL,
+    reminder_creator  varchar(255) NOT NULL,
+    PRIMARY KEY (reminder_id)
+);
+
+
+CREATE TABLE NoteCategory (
+    notecategory_id int NOT NULL AUTO_INCREMENT,
+    note_id int NOT NULL,
+    category_id int NOT NULL,
+    PRIMARY KEY (notecategory_id)
+);
+
+
+CREATE TABLE Notereminder (
+    notereminder_id int NOT NULL AUTO_INCREMENT,
+    note_id int NOT NULL,
+    reminder_id int NOT NULL,
+    PRIMARY KEY (notereminder_id)
+);
+
+
+CREATE TABLE usernote (
+    usernote_id int NOT NULL AUTO_INCREMENT,
+    note_id int NOT NULL,
+    user_id int NOT NULL,
+    PRIMARY KEY (usernote_id)
+);

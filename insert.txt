@@ -1,0 +1,47 @@
+INSERT INTO `keepnoteDB`.`User`(`user_id`,`user_name`,`user_added_date`,`user_password`,`user_mobile`)
+VALUES(1,'suresh',current_timestamp(),'P@ssw0rd','9566297076');
+INSERT INTO `keepnoteDB`.`User`(`user_id`,`user_name`,`user_added_date`,`user_password`,`user_mobile`)
+VALUES(2,'kumaran',current_timestamp(),'kumaran','7447431443');
+INSERT INTO `keepnoteDB`.`User`(`user_id`,`user_name`,`user_added_date`,`user_password`,`user_mobile`)
+VALUES(3,'kiran',current_timestamp(),'kapri','8438272276');
+
+INSERT INTO `keepnoteDB`.`Note`(`note_id`,`note_title`,`note_creation_date`,`note_content`,`note_status`)
+VALUES(1,'my_note_1',current_timestamp(),'my_note_1','todo');
+INSERT INTO `keepnoteDB`.`Note`(`note_id`,`note_title`,`note_creation_date`,`note_content`,`note_status`)
+VALUES(2,'my_note_2',current_timestamp(),'my_note_2','todo');
+INSERT INTO `keepnoteDB`.`Note`(`note_id`,`note_title`,`note_creation_date`,`note_content`,`note_status`)
+VALUES(3,'my_note_3',current_timestamp(),'my_note_3','todo');
+
+INSERT INTO `keepnoteDB`.`Category`(`category_id`,`category_name`,`category_creation_date`,`category_descr`,`category_creator`)
+VALUES(1,'todo',current_timestamp(),'todo','suresh');
+INSERT INTO `keepnoteDB`.`Category`(`category_id`,`category_name`,`category_creation_date`,`category_descr`,`category_creator`)
+VALUES(2,'in-progress',current_timestamp(),'in-progress','suresh');
+INSERT INTO `keepnoteDB`.`Category`(`category_id`,`category_name`,`category_creation_date`,`category_descr`,`category_creator`)
+VALUES(3,'complete',current_timestamp(),'complete','suresh');
+
+INSERT INTO `keepnoteDB`.`Reminder`(`reminder_id`,`reminder_name`,`reminder_creation_date`,`reminder_descr`,`reminder_type`,`reminder_creator`)
+VALUES(1,'tommorrow',current_timestamp(),'complete by tommorrow','complete','suresh');
+INSERT INTO `keepnoteDB`.`Reminder`(`reminder_id`,`reminder_name`,`reminder_creation_date`,`reminder_descr`,`reminder_type`,`reminder_creator`)
+VALUES(2,'two days',current_timestamp(),'complete in two days','complete','suresh');
+INSERT INTO `keepnoteDB`.`Reminder`(`reminder_id`,`reminder_name`,`reminder_creation_date`,`reminder_descr`,`reminder_type`,`reminder_creator`)
+VALUES(3,'three days',current_timestamp(),'complete in three days','complete','suresh');
+
+INSERT INTO `keepnoteDB`.`NoteCategory`(`notecategory_id`,`note_id`,`category_id`)
+VALUES(1,1,1);
+INSERT INTO `keepnoteDB`.`NoteCategory`(`notecategory_id`,`note_id`,`category_id`)
+VALUES(2,2,1);
+INSERT INTO `keepnoteDB`.`NoteCategory`(`notecategory_id`,`note_id`,`category_id`)
+VALUES(3,3,1);
+INSERT INTO `keepnoteDB`.`Notereminder`(`notereminder_id`,`note_id`,`reminder_id`)
+VALUES(1,1,1);
+INSERT INTO `keepnoteDB`.`Notereminder`(`notereminder_id`,`note_id`,`reminder_id`)
+VALUES(2,2,2);
+INSERT INTO `keepnoteDB`.`Notereminder`(`notereminder_id`,`note_id`,`reminder_id`)
+VALUES(3,3,3);
+
+INSERT INTO `keepnoteDB`.`usernote`(`usernote_id`,`note_id`,`user_id`)
+VALUES(1,1,1);
+INSERT INTO `keepnoteDB`.`usernote`(`usernote_id`,`note_id`,`user_id`)
+VALUES(2,2,2);
+INSERT INTO `keepnoteDB`.`usernote`(`usernote_id`,`note_id`,`user_id`)
+VALUES(3,3,3);

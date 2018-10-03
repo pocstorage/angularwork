@@ -1,0 +1,91 @@
+-- Fetch the row from User table based on Id
+SELECT * FROM keepnoteDB.User where user_id=1;
+-- Fetch the row from User table based on Password
+SELECT * FROM keepnoteDB.User where user_password='jain';
+-- Fetch all the rows from Note table based on the field note_creation_date.
+SELECT * FROM keepnoteDB.Note where note_creation_date='2018-05-08 10:54:21';
+-- Fetch all the Categories created after the particular Date.
+SELECT * FROM keepnoteDB.Category where category_creation_date>'2018-05-08 10:57:49';
+-- Fetch all the Note ID from UserNote table for a given User.
+SELECT un.note_id FROM keepnoteDB.usernote un inner join keepnoteDB.User u on un.user_id=u.user_id where u.user_name='suresh';
+-- Write Update query to modify particular Note for the given note Id.
+update `keepnoteDB`.`Note` set note_title='my_note_1_m',note_content='my_note_1_m',note_status='complete' where note_id=1;
+-- Fetch all the Notes from the Note table by a particular User.
+SELECT n.note_id,n.note_title,n.note_creation_date,n.note_content,n.note_status 
+FROM keepnoteDB.Note n inner join keepnoteDB.usernote un on n.note_id=un.note_id
+inner join keepnoteDB.User u on un.user_id=u.user_id where u.user_name='suresh';
+-- Fetch all the Notes from the Note table for a particular Category.
+SELECT n.note_id,n.note_title,n.note_creation_date,n.note_content,n.note_status 
+FROM keepnoteDB.Note n inner join keepnoteDB.NoteCategory nc on n.note_id=nc.note_id
+inner join keepnoteDB.Category c on nc.category_id=c.category_id where c.category_name='complete';
+-- Fetch all the reminder details for a given note id.
+SELECT r.reminder_id,r.reminder_name,r.reminder_creation_date,r.reminder_descr,r.reminder_type,r.reminder_creator
+from keepnoteDB.Reminder r join keepnoteDB.Notereminder nr on r.reminder_id=nr.reminder_id
+join keepnoteDB.Note n on nr.note_id=n.note_id where n.note_id=1;
+-- Fetch the reminder details for a given reminder id.
+SELECT * from keepnoteDB.Reminder where reminder_id=1;
+-- Write a query to create a new Note from particular User (Use Note and UserNote tables - insert statement).
+INSERT INTO `keepnoteDB`.`Note`(`note_title`,`note_creation_date`,`note_content`,`note_status`)
+VALUES('my_note_4',current_timestamp(),'my_note_4','todo');
+-- get note id from note table by note_title and note_content
+-- get user id from user table by user name
+-- use note id and user id to insert data in userNote table
+INSERT INTO `keepnoteDB`.`usernote`(`note_id`,`user_id`)
+VALUES(4,1);
+-- Write a query to create a new Note from particular User to particular Category(Use Note and NoteCategory tables - insert statement)
+INSERT INTO `keepnoteDB`.`Note`(`note_title`,`note_creation_date`,`note_content`,`note_status`)
+VALUES('my_note_5',current_timestamp(),'my_note_5','in progress');
+-- get note id from note table by note_title and note_content
+-- get user id from user table by user name
+-- use note id and user id to insert data in userNote table
+INSERT INTO `keepnoteDB`.`usernote`(`note_id`,`user_id`)
+VALUES(5,2);
+-- get the category id from category table by category name
+-- use note id and category is to inset data in note category table
+INSERT INTO `keepnoteDB`.`NoteCategory`(`note_id`,`category_id`)
+VALUES(5,2);
+-- Write a query to set a reminder for a particular note (Use Reminder and NoteReminder tables - insert statement)
+INSERT INTO `keepnoteDB`.`Reminder`(`reminder_name`,`reminder_creation_date`,`reminder_descr`,`reminder_type`,`reminder_creator`)
+VALUES('four days',current_timestamp(),'complete in four days','complete','suresh');
+-- get reminder id by reminder name
+-- get note id by note name
+-- use reminder id and note id to insert in note reminder table
+INSERT INTO `keepnoteDB`.`Notereminder`(`note_id`,`reminder_id`)
+VALUES(4,4);
+-- Write a query to delete particular Note added by a User(Note and UserNote tables - delete statement)
+delete from keepnoteDB.Note where note_id in (select un.note_id from keepnoteDB.usernote un join keepnoteDB.User u on un.user_id=u.user_id where u.user_name='kiran');
+delete from keepnoteDB.usernote where note_id in (select un.note_id from keepnoteDB.usernote un join keepnoteDB.User u on un.user_id=u.user_id where u.user_name='kiran');
+-- Write a query to delete particular Note from particular Category(Note and NoteCategory tables - delete statement)
+-- run delete query to delete note from note table by note id
+delete from keepnoteDB.Note where note_id in (select un.note_id from keepnoteDB.NoteCategory un join keepnoteDB.Category u on un.category_id=u.category_id where u.category_name='two days');
+delete from keepnoteDB.NoteCategory where note_id in (select un.note_id from keepnoteDB.NoteCategory un join keepnoteDB.Category u on un.category_id=u.category_id where u.category_name='two days');
+
+/*
+* Create a trigger to delete all matching records from UserNote, NoteReminder and NoteCategory table when :
+* 1. A particular note is deleted from Note table (all the matching records from UserNote, NoteReminder and NoteCategory should be removed automatically) 
+* 2. A particular user is deleted from User table (all the matching notes should be removed automatically)
+*/
+use keepnoteDB;
+/*DROP TRIGGER Note_delete;*/
+delimiter $$
+CREATE TRIGGER Note_delete BEFORE DELETE ON keepnoteDB.Note
+FOR EACH ROW
+BEGIN
+DELETE FROM keepnoteDB.UserNote WHERE keepnoteDB.UserNote.note_id=old.note_id;
+DELETE FROM keepnoteDB.NoteReminder WHERE keepnoteDB.NoteReminder.note_id=old.note_id;
+DELETE FROM keepnoteDB.NoteCategory WHERE keepnoteDB.NoteCategory.note_id=old.note_id;
+END
+$$
+delimiter ;
+use keepnoteDB;
+/*DROP TRIGGER User_delete;*/
+delimiter $$
+CREATE TRIGGER User_delete BEFORE DELETE ON keepnoteDB.User
+FOR EACH ROW
+BEGIN
+DELETE FROM keepnoteDB.UserNote WHERE keepnoteDB.UserNote.user_id=old.user_id;
+DELETE FROM keepnoteDB.Note WHERE keepnoteDB.Note.note_id in 
+(SELECT keepnoteDB.UserNote.note_id FROM keepnoteDB.UserNote WHERE keepnoteDB.UserNote.user_id=old.user_id);
+END
+$$
+delimiter ;
